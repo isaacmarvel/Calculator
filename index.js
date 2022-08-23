@@ -79,6 +79,18 @@ button0.addEventListener("click", () => {
   displayOnPage(0);
 });
 
+let decimalButton = document.querySelector("#decimalButton");
+decimalButton.addEventListener("click", () => {
+  display += ".";
+  document.getElementById("displayField").innerHTML = display;
+});
+
+let backspaceButton = document.querySelector("#backspaceButton");
+backspaceButton.addEventListener("click", () => {
+  display = display.substring(0, display.length - 1);
+  document.getElementById("displayField").innerHTML = display;
+});
+
 function nanChecker() {
   if (operatedNumber === NaN || operatedNumber === Infinity) {
     document.getElementById("displayField").innerHTML =
@@ -93,7 +105,7 @@ function nanChecker() {
     document.getElementById("displayField").innerHTML =
       Math.round(firstNumber * 100) / 100;
   }
-};
+}
 
 function operatorLogic(operatorSign) {
   if (operator === "") {
