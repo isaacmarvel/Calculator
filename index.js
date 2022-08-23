@@ -31,9 +31,7 @@ function operate(operator, num1, num2) {
   }
 }
 let display = "";
-//function that populates display when i click number button, storing them to display value.
 
-//need to have them display on apge with event listener
 let displayButton1 = function () {
   console.log(display + 1);
   return
@@ -126,15 +124,15 @@ button0.addEventListener("click",()=>{
   document.getElementById("displayField").innerHTML = display;
 });
 
+
 let firstNumber = 0;
 let operator = "";
 
-//sets firstNumber to display number, sets operator, and resets display
-
+//These four set firstNumber to display number, sets operator, and resets display
 let plusButton = document.querySelector("#plusButton");
 plusButton.addEventListener("click",()=>{
   firstNumber = Number(display);
-  operator = "plus";
+  // operator = "plus";
   display = "";
   document.getElementById("displayField").innerHTML = display;
 });
@@ -142,7 +140,7 @@ plusButton.addEventListener("click",()=>{
 let minusButton = document.querySelector("#minusButton");
 minusButton.addEventListener("click",()=>{
   firstNumber = Number(display);
-  operator = "minus";
+  // operator = "minus";
   display = "";
   document.getElementById("displayField").innerHTML = display;
 });
@@ -150,46 +148,36 @@ minusButton.addEventListener("click",()=>{
 let multiplyButton = document.querySelector("#multiplyButton");
 multiplyButton.addEventListener("click",()=>{
   firstNumber = Number(display);
-  operator = "multiply";
+  // operator = "multiply";
   display = "";
   document.getElementById("displayField").innerHTML = display;
 });
 
 let divideButton = document.querySelector("#divideButton");
 divideButton.addEventListener("click",()=>{
-  firstNumber = Number(display);
-  operator = "divide";
-  display = "";
-  document.getElementById("displayField").innerHTML = display;
+  if (firstNumber === "") {
+    firstNumber = Number(display);
+    // operator = "divide";
+    display = "";
+    document.getElementById("displayField").innerHTML = display;
+  } else {
+    //should display the result, not the second number you press!
+    display = operate("/", firstNumber, Number(display));
+    document.getElementById("displayField").innerHTML = display;
+  }
 });
 
-
-
-// let plusPressed = function() {
+//basically this should just be the operate part of what's in the above functions
+// let equalsButton = document.querySelector("#equalsButton");
+// equalsButton.addEventListener("click",()=>{
 //   firstNumber = Number(display);
-//   operator = "plus";
+//   operator = "divide";
 //   display = "";
 //   document.getElementById("displayField").innerHTML = display;
+// });
 
-// }
 
-let minusPressed = function() {
-  firstNumber = Number(display);
-  operator = "minus";
-  display = "";
-}
 
-let multiplyPressed = function() {
-  firstNumber = Number(display);
-  operator = "multiply";
-  display = "";
-}
-
-let dividePressed = function() {
-  firstNumber = Number(display);
-  operator = "divide";
-  display = "";
-}
 
 // let equalsPressed = function(operatorYouClicked) {
 //   firstNumber = Number(display);
