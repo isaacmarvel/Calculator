@@ -1,18 +1,12 @@
-function add(num1, num2) {
-  return num1 + num2;
-}
+let add = (num1, num2) => num1 + num2;
+let subtract = (num1, num2) => num1 - num2;
+let multiply = (num1, num2) => num1 * num2;
+let divide = (num1, num2) => num1 / num2;
 
-function subtract(num1, num2) {
-  return num1 - num2;
-}
-
-function multiply(num1, num2) {
-  return num1 * num2;
-}
-
-function divide(num1, num2) {
-  return num1 / num2;
-}
+let display = "";
+let firstNumber = 0;
+let operatedNumber = 0;
+let operator = "";
 
 function operate(operator, num1, num2) {
   switch (operator) {
@@ -30,153 +24,132 @@ function operate(operator, num1, num2) {
       break;
   }
 }
-let display = "";
-
-let displayButton1 = function () {
-  console.log(display + 1);
-  return;
-};
-let displayButton2 = function () {
-  return display + 2;
-};
-let displayButton3 = function () {
-  return display + 3;
-};
-let displayButton4 = function () {
-  return display + 4;
-};
-let displayButton5 = function () {
-  return display + 5;
-};
-let displayButton6 = function () {
-  return display + 6;
-};
-let displayButton7 = function () {
-  return display + 7;
-};
-let displayButton8 = function () {
-  return display + 8;
-};
-let displayButton9 = function () {
-  return display + 9;
-};
-let displayButton0 = function () {
-  return display + 0;
-};
+function displayOnPage(number) {
+  display += number;
+  document.getElementById("displayField").innerHTML = display;
+}
 
 let button1 = document.querySelector("#button1");
 button1.addEventListener("click", () => {
-  display += 1;
-  document.getElementById("displayField").innerHTML = display;
+  displayOnPage(1);
 });
 
 let button2 = document.querySelector("#button2");
 button2.addEventListener("click", () => {
-  display += 2;
-  document.getElementById("displayField").innerHTML = display;
+  displayOnPage(2);
 });
 
 let button3 = document.querySelector("#button3");
 button3.addEventListener("click", () => {
-  display += 3;
-  document.getElementById("displayField").innerHTML = display;
+  displayOnPage(3);
 });
 
 let button4 = document.querySelector("#button4");
 button4.addEventListener("click", () => {
-  display += 4;
-  document.getElementById("displayField").innerHTML = display;
+  displayOnPage(4);
 });
 
 let button5 = document.querySelector("#button5");
 button5.addEventListener("click", () => {
-  display += 5;
-  document.getElementById("displayField").innerHTML = display;
+  displayOnPage(5);
 });
 
 let button6 = document.querySelector("#button6");
 button6.addEventListener("click", () => {
-  display += 6;
-  document.getElementById("displayField").innerHTML = display;
+  displayOnPage(6);
 });
 
 let button7 = document.querySelector("#button7");
 button7.addEventListener("click", () => {
-  display += 7;
-  document.getElementById("displayField").innerHTML = display;
+  displayOnPage(7);
 });
 
 let button8 = document.querySelector("#button8");
 button8.addEventListener("click", () => {
-  display += 8;
-  document.getElementById("displayField").innerHTML = display;
+  displayOnPage(8);
 });
 
 let button9 = document.querySelector("#button9");
 button9.addEventListener("click", () => {
-  display += 9;
-  document.getElementById("displayField").innerHTML = display;
+  displayOnPage(9);
 });
 
 let button0 = document.querySelector("#button0");
 button0.addEventListener("click", () => {
-  display += 0;
-  document.getElementById("displayField").innerHTML = display;
+  displayOnPage(0);
 });
 
-let firstNumber = 0;
-let secondNumber = 0;
-let operator = "";
+function nanChecker() {
+  if (operatedNumber === NaN || operatedNumber === Infinity) {
+    document.getElementById("displayField").innerHTML =
+      "That's not a number, try again";
+    firstNumber = 0;
+    operatedNumber = 0;
+    operator = "";
+    display = "";
+  } else {
+    firstNumber = operatedNumber;
+    display = "";
+    document.getElementById("displayField").innerHTML =
+      Math.round(firstNumber * 100) / 100;
+  }
+};
 
-//These four set firstNumber to display number, sets operator, and resets display
+function operatorLogic(operatorSign) {
+  if (operator === "") {
+    firstNumber = Number(display);
+    display = "";
+    operator = operatorSign;
+    console.log(operator);
+    document.getElementById("displayField").innerHTML =
+      Math.round(display * 100) / 100;
+  } else {
+    operatedNumber = operate(operator, firstNumber, Number(display));
+    nanChecker();
+  }
+}
+
 let plusButton = document.querySelector("#plusButton");
 plusButton.addEventListener("click", () => {
-  firstNumber = Number(display);
-  display = "";
-  document.getElementById("displayField").innerHTML = display;
+  operatorLogic("+");
 });
 
 let minusButton = document.querySelector("#minusButton");
 minusButton.addEventListener("click", () => {
-  firstNumber = Number(display);
-  display = "";
-  document.getElementById("displayField").innerHTML = display;
+  operatorLogic("-");
 });
 
 let multiplyButton = document.querySelector("#multiplyButton");
 multiplyButton.addEventListener("click", () => {
-  firstNumber = Number(display);
-  display = "";
-  document.getElementById("displayField").innerHTML = display;
+  operatorLogic("*");
 });
 
 let divideButton = document.querySelector("#divideButton");
 divideButton.addEventListener("click", () => {
-  if (operator === "") {
-    firstNumber = Number(display);
-    display = "";
-    operator = "/";
-    document.getElementById("displayField").innerHTML = display;
-  } else {
-    display = operate(operator, firstNumber, Number(display));
-    document.getElementById("displayField").innerHTML = display;
-  }
+  operatorLogic("/");
 });
 
 let equalsButton = document.querySelector("#equalsButton");
 equalsButton.addEventListener("click", () => {
-  console.log(firstNumber);
-  console.log(operator);
-  console.log(Number(display));
   display = operate(operator, firstNumber, Number(display));
-  document.getElementById("displayField").innerHTML = display;
+  if (display === NaN || display === Infinity) {
+    document.getElementById("displayField").innerHTML =
+      "That's not a number, try again";
+    firstNumber = 0;
+    operatedNumber = 0;
+    operator = "";
+    display = "";
+  } else {
+    document.getElementById("displayField").innerHTML =
+      Math.round(display * 100) / 100;
+  }
 });
 
-// let equalsPressed = function(operatorYouClicked) {
-//   firstNumber = Number(display);
-//   operator = plus;
-//   display = "";
-// }
-//whne operator is pressed, run function to save display, save operation chosen, and operated on them when = is pressed.
-
-//store first number input into the calc when a user presses an operator, save operation chosen, operate on them when = is pressed.
+let clearButton = document.querySelector("#clearButton");
+clearButton.addEventListener("click", () => {
+  firstNumber = 0;
+  operatedNumber = 0;
+  operator = "";
+  display = "";
+  document.getElementById("displayField").innerHTML = display;
+});
