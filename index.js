@@ -81,18 +81,29 @@ button0.addEventListener("click", () => {
 
 let decimalButton = document.querySelector("#decimalButton");
 decimalButton.addEventListener("click", () => {
-  displayOnPage(".")
+  displayOnPage(".");
 });
-
 
 let backspaceButton = document.querySelector("#backspaceButton");
 function backspaceFunction() {
   display = display.substring(0, display.length - 1);
   document.getElementById("displayField").innerHTML = display;
-};
+}
 
 backspaceButton.addEventListener("click", () => {
   backspaceFunction();
+});
+
+let negativeButton = document.querySelector("#negativeButton");
+negativeButton.addEventListener("click", () => {
+  display *= -1;
+  document.getElementById("displayField").innerHTML = display;
+});
+
+let percentButton = document.querySelector("#percentButton");
+percentButton.addEventListener("click", () => {
+  display *= .01;
+  document.getElementById("displayField").innerHTML = display;
 });
 
 function nanChecker() {
@@ -125,35 +136,24 @@ function operatorLogic(operatorSign) {
 }
 
 let plusButton = document.querySelector("#plusButton");
-function plusFunction() {
-  plusButton.addEventListener("click", () => {
-    operatorLogic("+");
-  });
-}
-plusFunction();
+plusButton.addEventListener("click", () => {
+  operatorLogic("+");
+});
 
 let minusButton = document.querySelector("#minusButton");
-function minusFunction() {
-  minusButton.addEventListener("click", () => {
-    operatorLogic("-");
-  });
-}
-minusFunction();
+minusButton.addEventListener("click", () => {
+  operatorLogic("-");
+});
 
 let multiplyButton = document.querySelector("#multiplyButton");
-function multiplyFunction() {
-  multiplyButton.addEventListener("click", () => {
-    operatorLogic("*");
-  });
-}
-multiplyFunction();
+multiplyButton.addEventListener("click", () => {
+  operatorLogic("*");
+});
 
 document.querySelector("#divideButton");
-function divideFunction() {
-  divideButton.addEventListener("click", () => {
-    operatorLogic("/");
-  });
-}
+divideButton.addEventListener("click", () => {
+  operatorLogic("/");
+});
 
 //equals
 function equalsFunction() {
@@ -240,7 +240,7 @@ document.addEventListener("keydown", (e) => {
       operatorLogic("/");
       break;
     case "Backspace":
-      backspaceFunction()
+      backspaceFunction();
       break;
     case "c":
       clearAll();
