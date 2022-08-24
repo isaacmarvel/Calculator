@@ -84,15 +84,15 @@ decimalButton.addEventListener("click", () => {
   displayOnPage(".");
 });
 
-let backspaceButton = document.querySelector("#backspaceButton");
-function backspaceFunction() {
-  display = display.substring(0, display.length - 1);
-  document.getElementById("displayField").innerHTML = display;
-}
+// let backspaceButton = document.querySelector("#backspaceButton");
+// function backspaceFunction() {
+//   display = display.substring(0, display.length - 1);
+//   document.getElementById("displayField").innerHTML = display;
+// }
 
-backspaceButton.addEventListener("click", () => {
-  backspaceFunction();
-});
+// backspaceButton.addEventListener("click", () => {
+//   backspaceFunction();
+// });
 
 let negativeButton = document.querySelector("#negativeButton");
 negativeButton.addEventListener("click", () => {
@@ -239,9 +239,9 @@ document.addEventListener("keydown", (e) => {
     case "/":
       operatorLogic("/");
       break;
-    case "Backspace":
-      backspaceFunction();
-      break;
+    // case "Backspace":
+    //   backspaceFunction();
+    //   break;
     case "c":
       clearAll();
       break;

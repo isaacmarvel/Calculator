@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+}
+.container {
+    width: 100%;
+    height: 100vh;
+    background-color: #DBF9FF;
+}
+.calc {
+    width: 232px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #000000;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: relative;
+    z-index: 0;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.screen-container {
+    width: 100%;
+    height: 160px;
+    color: #fff;
+    vertical-align: text-top;
+    position: relative;
+    overflow: hidden;
+}
+.screen {
+    width: 100%;
+    position: absolute;
+    text-align: right;
+    padding: 10px;
+    box-sizing: border-box;
+    bottom: 10px;
+    font-size: 26px;
+    word-wrap: break-word;
+}
+.row {
+    display: flex;
+}
+.btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin: 4px;
+    box-sizing: border-box;
+    background-color: #313131;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    font-size: 18px;
+    user-select: none;
+}
+.btn::after {
+    content: attr(data-label);
+}
+.ac, .plus-minus, .percent {
+    background-color: #9f9f9f;
+    color: #000;
+}
+.divide, .times, .minus, .plus, .eql {
+    background-color: #f59906;
+}
+.zero {
+    width: 108px;
+}
+.zero::after {
+    content: attr(data-label);
+    width: 40px;
+    display: block;
+}
+.plus-minus span:first-child {
+    vertical-align: top;
+}
+.btn:hover, .btn:active {
+    background-color: #585858;
+}
+.divide:hover, .times:hover, .minus:hover, .plus:hover, .eql:hover, 
+.divide:active, .times:active, .minus:active, .plus:active, .eql:active {
+    color: #f59906;
+    background-color: #fff !important;
+}
+.ac:hover, .plus-minus:hover, .percent:hover,
+.ac:active, .plus-minus:active, .percent:active {
+    background-color: #c4c4c4;
+}
+
+
+@media (max-width: 576px) {
+    .calc {
+        width: 324px;
+    }
+    .screen-container {
+        height: 220px;
+    }
+    .screen {
+        font-size: 35px;
+    }
+    .btn {
+        width: 70px;
+        height: 70px;
+        margin: 6px;
+        font-size: 25px;
+        line-height: 70px;
+    }
+    .zero {
+        width: 152px;
+    }
+    .zero::after {
+        width: 70px;
+    }
+}
