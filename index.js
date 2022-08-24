@@ -81,14 +81,18 @@ button0.addEventListener("click", () => {
 
 let decimalButton = document.querySelector("#decimalButton");
 decimalButton.addEventListener("click", () => {
-  display += ".";
-  document.getElementById("displayField").innerHTML = display;
+  displayOnPage(".")
 });
 
+
 let backspaceButton = document.querySelector("#backspaceButton");
-backspaceButton.addEventListener("click", () => {
+function backspaceFunction() {
   display = display.substring(0, display.length - 1);
   document.getElementById("displayField").innerHTML = display;
+};
+
+backspaceButton.addEventListener("click", () => {
+  backspaceFunction();
 });
 
 function nanChecker() {
@@ -112,7 +116,6 @@ function operatorLogic(operatorSign) {
     firstNumber = Number(display);
     display = "";
     operator = operatorSign;
-    console.log(operator);
     document.getElementById("displayField").innerHTML =
       Math.round(display * 100) / 100;
   } else {
@@ -122,29 +125,40 @@ function operatorLogic(operatorSign) {
 }
 
 let plusButton = document.querySelector("#plusButton");
-plusButton.addEventListener("click", () => {
-  operatorLogic("+");
-});
+function plusFunction() {
+  plusButton.addEventListener("click", () => {
+    operatorLogic("+");
+  });
+}
+plusFunction();
 
 let minusButton = document.querySelector("#minusButton");
-minusButton.addEventListener("click", () => {
-  operatorLogic("-");
-});
+function minusFunction() {
+  minusButton.addEventListener("click", () => {
+    operatorLogic("-");
+  });
+}
+minusFunction();
 
 let multiplyButton = document.querySelector("#multiplyButton");
-multiplyButton.addEventListener("click", () => {
-  operatorLogic("*");
-});
+function multiplyFunction() {
+  multiplyButton.addEventListener("click", () => {
+    operatorLogic("*");
+  });
+}
+multiplyFunction();
 
-let divideButton = document.querySelector("#divideButton");
-divideButton.addEventListener("click", () => {
-  operatorLogic("/");
-});
+document.querySelector("#divideButton");
+function divideFunction() {
+  divideButton.addEventListener("click", () => {
+    operatorLogic("/");
+  });
+}
 
-let equalsButton = document.querySelector("#equalsButton");
-equalsButton.addEventListener("click", () => {
+//equals
+function equalsFunction() {
   display = operate(operator, firstNumber, Number(display));
-  if (display === NaN || display === Infinity) {
+  if (display === NaN || display === undefined || display === Infinity) {
     document.getElementById("displayField").innerHTML =
       "That's not a number, try again";
     firstNumber = 0;
@@ -155,13 +169,83 @@ equalsButton.addEventListener("click", () => {
     document.getElementById("displayField").innerHTML =
       Math.round(display * 100) / 100;
   }
+}
+let equalsButton = document.querySelector("#equalsButton");
+equalsButton.addEventListener("click", () => {
+  equalsFunction();
 });
 
-let clearButton = document.querySelector("#clearButton");
-clearButton.addEventListener("click", () => {
+//clearing
+function clearAll() {
   firstNumber = 0;
   operatedNumber = 0;
   operator = "";
   display = "";
   document.getElementById("displayField").innerHTML = display;
+}
+let clearButton = document.querySelector("#clearButton");
+clearButton.addEventListener("click", () => {
+  clearAll();
 });
+
+//keypresses
+document.addEventListener("keydown", (e) => {
+  switch (e.key) {
+    case "1":
+      displayOnPage(1);
+      break;
+    case "2":
+      displayOnPage(2);
+      break;
+    case "3":
+      displayOnPage(3);
+      break;
+    case "4":
+      displayOnPage(4);
+      break;
+    case "5":
+      displayOnPage(5);
+      break;
+    case "6":
+      displayOnPage(6);
+      break;
+    case "7":
+      displayOnPage(7);
+      break;
+    case "8":
+      displayOnPage(8);
+      break;
+    case "9":
+      displayOnPage(9);
+      break;
+    case "0":
+      displayOnPage(0);
+      break;
+    case ".":
+      displayOnPage(".");
+      break;
+    case "=":
+      equalsFunction();
+      break;
+    case "+":
+      operatorLogic("+");
+      break;
+    case "-":
+      operatorLogic("-");
+      break;
+    case "*":
+      operatorLogic("*");
+      break;
+    case "/":
+      operatorLogic("/");
+      break;
+    case "Backspace":
+      backspaceFunction()
+      break;
+    case "c":
+      clearAll();
+      break;
+  }
+});
+
+window.displayOnPage = displayOnPage;
